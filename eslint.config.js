@@ -1,15 +1,15 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "typescript-eslint";
+import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+import { fixupConfigRules } from "@eslint/compat";
+
 
 export default [
+  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
+  { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
+  {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
-  {
-    files: ['src/**/*.js'],
-    languageOptions: { globals: globals.node },
-    rules: {
-      semi: 'error',
-      'no-unused-vars': ['error', { args: 'none' }],
-      'no-undef': 'error',
-    },
-  },
+  ...tseslint.configs.recommended,
+  ...fixupConfigRules(pluginReactConfig),
 ];

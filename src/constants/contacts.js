@@ -8,4 +8,4 @@ import path from 'path';
 
 // export default { read };
 
-export const PATH_DB = path.resolve('db', 'db.json');
+export const PATH_DB = path.resolve('src', 'db', 'db.json');
